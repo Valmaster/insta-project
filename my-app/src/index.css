@@ -1,0 +1,60 @@
+body {
+    background-color: #fafafa;
+}
+
+main {
+    max-width: 968px;
+    margin: 0 auto;
+}
+
+h3 {
+    font-size: 1.5rem !important;
+}
+
+#suggestions, #list-news {
+    display: inline-block;
+    margin: 0 auto;
+}
+
+#suggestions {
+    float: right;
+}
+
+#suggestions > h2, #suggestions > span {
+    display: inline-block;
+}
+
+#list-news i {
+    margin: 0 0.3em;
+    cursor: pointer;
+}
+
+#list-news i:hover {
+    opacity: 0.5;
+}
+
+#list-news {
+    max-width: 60%;
+}
+
+#suggestions {
+    max-width: 40%;
+}
+
+.news {
+    margin: 2em 0;
+    background-color: #fff;
+    border: 1px solid lightgray;
+}
+
+.news p, .news h3, .news .suggestion-icons {
+    padding: 1em;
+}
+
+.news img {
+    max-width: 100%;
+}
+
+hr {
+    border-color: #fafafa
+}
