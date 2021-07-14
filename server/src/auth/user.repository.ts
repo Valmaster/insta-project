@@ -1,4 +1,4 @@
-import { EntityRepository, Repository } from 'typeorm';
+import { Connection, EntityRepository, Repository } from 'typeorm';
 import { User } from './user.entity';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import {
@@ -40,6 +40,16 @@ export class UserRepository extends Repository<User> {
     } else {
       return null;
     }
+  }
+
+  async follow(
+    userFollow: User,
+    user: User,
+    connection: Connection,
+  ): Promise<User> {
+    await connection.manager.save(userFollow);
+
+    return user;
   }
 
   private async hashPassword(password: string, salt: string): Promise<string> {
