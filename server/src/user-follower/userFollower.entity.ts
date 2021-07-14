@@ -6,6 +6,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { User } from '../auth/user.entity';
 
 @Entity('user_followers')
 export class UserFollower extends BaseEntity {
@@ -20,11 +21,11 @@ export class UserFollower extends BaseEntity {
   // tslint:disable-next-line: variable-name
   follower_id: number;
 
-  @ManyToOne(() => UserEntity, (u: UserEntity) => u.followers)
+  @ManyToOne((type) => User, (user) => user.followers, { eager: false })
   @JoinColumn({ name: 'follower_id' })
-  followers: UserEntity;
+  followers: User;
 
-  @ManyToOne((type) => UserEntity, (u: UserEntity) => u.following)
+  @ManyToOne((type) => User, (user) => user.following, { eager: false })
   @JoinColumn({ name: 'following_id' })
-  following: UserEntity;
+  following: User;
 }

@@ -6,9 +6,17 @@ import {
   InternalServerErrorException,
 } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
+import { UserFollower } from '../user-follower/userFollower.entity';
 
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
+  private connection;
+
+  constructor(connection: Connection) {
+    super();
+    this.connection = connection;
+  }
+
   async signUp(authCredentialsDto: AuthCredentialsDto): Promise<void> {
     const { username, password } = authCredentialsDto;
 
@@ -42,13 +50,14 @@ export class UserRepository extends Repository<User> {
     }
   }
 
-  async follow(
-    userFollow: User,
-    user: User,
-    connection: Connection,
-  ): Promise<User> {
-    await connection.manager.save(userFollow);
+  async follow(userFollow: User, user: User): Promise<User> {
+    console.log(userFollow);
+    const newFollow = new UserFollower();
+    newFollow.following = userFollow;
+    await this.connection.manager.save(newFollow);
 
+    user.following = [userFollow];
+    await this.connection.manager.save(user);
     return user;
   }
 
