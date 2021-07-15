@@ -1,5 +1,5 @@
 export const getPosts = async () => {
-    let response = await fetch('http://localhost:3001/posts', {
+    let response = await fetch('http://localhost:3001/publications', {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
@@ -11,7 +11,7 @@ export const getPosts = async () => {
 }
 
 export const postPosts = async (post) => {
-    let response = await fetch('http://localhost:3001/posts', {
+    let response = await fetch('http://localhost:3001/publications', {
         method: 'POST',
         body: JSON.stringify(post),
         headers: {
