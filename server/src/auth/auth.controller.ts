@@ -30,11 +30,11 @@ export class AuthController {
     return this.authService.signIn(authCredentialsDto);
   }
 
-  @Patch('following/:id')
+  /*  @Patch('following/:id')
   follow(
     @Param('id', ParseIntPipe) id: number,
     @GetUser() user: User,
   ): Promise<User> {
     return this.authService.follow(id, user);
-  }
+  }*/
 }
