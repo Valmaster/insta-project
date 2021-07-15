@@ -1,0 +1,153 @@
+.actuality-flow {
+  margin-top: 100px;
+  height: 500px;
+  width: 600px;
+  height: 10000px;
+}
+
+.item-flow {
+  margin-bottom: 70px;
+  width: 100%;
+  height: auto;
+  border: 1px solid gray;
+}
+
+.item-flow-header {
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px solid gray;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.item-flow-header-box {
+  display: flex;
+  align-items: center;
+}
+
+.item-flow-image {
+  width: 100%;
+  height: auto;
+  display: inline-block;
+}
+
+.item-flow-image > img {
+   width:100%;
+}
+
+.item-flow-description {
+  width: 100%;
+  height: auto;
+  padding-bottom: 1px;
+}
+
+.profile i {
+  font-size: 30px;
+}
+
+.profile {
+  padding: 0 15px 0 10px;
+}
+
+.profile-name {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-name > span {
+  padding: 0;
+  margin: 0;
+}
+
+.profile-name > span:nth-child(1) {
+  font-weight: bold;
+}
+
+.profile-name > span:nth-child(2) {
+  font-style: italic;
+  font-size: 12px;
+}
+
+.profile-more-action {
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 25px;
+  padding: 0 15px 0 0;
+}
+
+.item-flow-interact {
+  width: 100%;
+  height: auto;
+}
+
+.item-flow-interact > i {
+  font-size: 25px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.item-flow-liked-by {
+  padding: 0 0 0 10px;
+}
+
+.item-flow-liked-by > p {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.item-flow-content > p {
+  padding-bottom: 4px;
+  margin-bottom: 0;
+}
+
+.item-flow-content {
+    padding: 0 0 0 10px;
+}
+
+.hashtag {
+  text-decoration: none;
+  color: #00376b;
+}
+
+.item-flow-createdAt {
+  padding: 0 0 0 10px;
+  opacity: 0.6;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.item-flow-comment {
+  border-top: 1px solid gray;
+  display: flex;
+  width: 100%;
+  height: 50px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0 0 10px;
+}
+
+.item-flow-comment-smile {
+  font-size: 25px;
+}
+
+.item-flow-comment-content {
+  display: flex;
+  align-items: center;
+  padding-right: 10px;
+}
+
+.item-flow-comment-input > p {
+  padding-bottom: 0;
+  margin-bottom: 0;
+  margin-left: 10px;
+}
+
+.item-flow-comment-btn-publish {
+  padding-right: 10px;
+  padding-bottom: 0;
+  margin-bottom: 0;
+  color: #00376b;
+  font-weight: bold;
+  cursor: pointer;
+}

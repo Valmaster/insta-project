@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+/* font-family: 'Lato', sans-serif; */
+
+.content {
+  display: flex;
+  padding: 20px 50px 20px 250px;
+  height: 10000px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
