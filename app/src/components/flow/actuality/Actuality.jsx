@@ -4,7 +4,6 @@ import HeaderActuality from './header/Header'
 import DescriptionActuality from './description/Description'
 import CommentActuality from './comment/Comment'
 import * as postsApi from "../../../api/posts";
-import {act} from "@testing-library/react";
 
 const Actuality = () => {
 
