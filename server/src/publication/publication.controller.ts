@@ -38,6 +38,7 @@ export class PublicationController {
 
   @Post()
   @UsePipes(ValidationPipe)
+  @UseGuards(AuthGuard())
   createPublication(
     @Body() createPublicationDto: CreatePublicationDto,
     @GetUser() user: User,
@@ -49,6 +50,7 @@ export class PublicationController {
   }
 
   @Patch('/:id')
+  @UseGuards(AuthGuard())
   updatePublication(
     @Param('id', ParseIntPipe) id: number,
     @Body() updatePublicationDto: UpdatePublicationDto,
@@ -57,6 +59,7 @@ export class PublicationController {
   }
 
   @Delete('/:id')
+  @UseGuards(AuthGuard())
   deletePublication(
     @Param('id', ParseIntPipe) id: number,
     @GetUser() user: User,
