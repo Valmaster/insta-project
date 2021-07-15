@@ -17,6 +17,11 @@ export class UserRepository extends Repository<User> {
     this.connection = connection;
   }
 
+  async getUsers(): Promise<User[]> {
+    const query = this.createQueryBuilder('user');
+    return await query.getMany();
+  }
+
   async signUp(authCredentialsDto: AuthCredentialsDto): Promise<void> {
     const { username, password } = authCredentialsDto;
 

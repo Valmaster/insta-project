@@ -47,6 +47,7 @@ export const setup = () => {
 
     if (token) {
         const jwtData = jwtDecode(token)
+        console.log(jwtData);
         if (jwtData.exp * 1000 > new Date().getTime()) {
             setAxiosToken(token)
         } else {

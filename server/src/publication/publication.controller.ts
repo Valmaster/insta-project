@@ -20,13 +20,13 @@ import { CreatePublicationDto } from './dto/create-publication.dto';
 import { UpdatePublicationDto } from './dto/update-publication.dto';
 
 @Controller('publications')
-@UseGuards(AuthGuard())
+//@UseGuards(AuthGuard())
 export class PublicationController {
   constructor(private publicationService: PublicationService) {}
 
   @Get()
-  getPublications(@GetUser() user: User): Promise<Publication[]> {
-    return this.publicationService.getPublications(user);
+  getPublications(): Promise<Publication[]> {
+    return this.publicationService.getPublications();
   }
 
   @Get('/:id')

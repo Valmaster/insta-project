@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   Param,
   ParseIntPipe,
   Patch,
@@ -15,6 +16,11 @@ import { GetUser } from './get-user.decorator';
 @Controller()
 export class AuthController {
   constructor(private authService: AuthService) {}
+
+  @Get('users')
+  getUsers(): Promise<User[]> {
+    return this.authService.getUsers();
+  }
 
   @Post('auth/signup')
   signUp(

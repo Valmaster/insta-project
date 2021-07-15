@@ -13,8 +13,8 @@ export class PublicationService {
     private publicationRepository: PublicationRepository,
   ) {}
 
-  async getPublications(user: User): Promise<Publication[]> {
-    return await this.publicationRepository.getPublications(user);
+  async getPublications(): Promise<Publication[]> {
+    return await this.publicationRepository.getPublications();
   }
 
   async getPublicationById(id: number): Promise<Publication> {

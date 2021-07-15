@@ -6,12 +6,14 @@ import { Publication } from './publication.entity';
 
 @EntityRepository(Publication)
 export class PublicationRepository extends Repository<Publication> {
-  async getPublications(user: User): Promise<Publication[]> {
+  async getPublications(): Promise<Publication[]> {
     const query = this.createQueryBuilder('publication');
+    return await query.getMany();
+    /*    const query = this.createQueryBuilder('publication');
 
     query.where('publication.userId = :userId', { userId: user.id });
 
-    return await query.getMany();
+    return await query.getMany();*/
   }
 
   async createPublication(
