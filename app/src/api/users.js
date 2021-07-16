@@ -45,8 +45,9 @@ export const logout = () => {
 }
 
 export const setup = () => {
+    let token = null;
     const store = JSON.parse(window.localStorage.getItem("persist:store"));
-    const token = JSON.parse(store.user).user_logged.accessToken;
+    if (store) token = JSON.parse(store.user).user_logged.accessToken;
 
     if (token) {
         const jwtData = jwtDecode(token)
@@ -62,8 +63,9 @@ export const setup = () => {
 }
 
 export const isAuthenticated = () => {
+    let token = null;
     const store = JSON.parse(window.localStorage.getItem("persist:store"));
-    const token = JSON.parse(store.user).user_logged.accessToken;
+    if (store) token = JSON.parse(store.user).user_logged.accessToken;
 
     if (token) {
         const jwtData = jwtDecode(token)
