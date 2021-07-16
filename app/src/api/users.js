@@ -44,7 +44,7 @@ export const logout = () => {
     delete axios.defaults.headers["Authorization"]
 }
 
-export const authenticate = async (credentials) => {
+/*export const authenticate = async (credentials) => {
     return axios
         .post("http://localhost:3001/auth/signin", credentials)
         .then(({data}) => {
@@ -53,7 +53,7 @@ export const authenticate = async (credentials) => {
             return false;
         })
         .catch(() => true );
-}
+}*/
 
 export const setup = () => {
     const token = window.localStorage.getItem("accessToken")

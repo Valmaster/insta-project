@@ -3,8 +3,10 @@ import * as usersApi from "../../../api/users";
 import AuthContext from "../../../contexts/AuthContext"
 import '../Auth.css';
 import {toast} from "react-toastify";
+import * as usersActions from "../../../redux/store/user/user.actions";
+import {connect} from "react-redux";
 
-const Login = ({history}) => {
+const Login = ({history, login, user}) => {
 
     const {setIsAuthenticated} = useContext(AuthContext)
 
@@ -25,7 +27,8 @@ const Login = ({history}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
+            await login(credentials);
+/*        try {
             const error = await usersApi.authenticate(credentials)
             console.log(error)
             if (error) {
@@ -38,7 +41,7 @@ const Login = ({history}) => {
             }
         } catch (error) {
             toast.error('Identifiants incorrects')
-        }
+        }*/
     }
 
     return (
@@ -73,4 +76,14 @@ const Login = ({history}) => {
     )
 }
 
-export default Login
+const mapStateToProps = (state) => {
+    return {
+        user: state.user.user_logged,
+    }
+};
+
+const mapDispatchToProps = dispatch => ({
+    login: (credential) => dispatch(usersActions.login(credential)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

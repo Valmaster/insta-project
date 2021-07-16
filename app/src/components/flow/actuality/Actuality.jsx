@@ -3,25 +3,24 @@ import React, {useEffect, useState} from 'react';
 import HeaderActuality from './header/Header'
 import DescriptionActuality from './description/Description'
 import CommentActuality from './comment/Comment'
-import * as postsApi from "../../../api/posts";
-import * as userApi from "../../../api/users";
 import {toast} from "react-toastify";
 import {connect} from "react-redux";
 import * as publicationsActions from '../../../redux/store/publication/publication.actions';
+import * as usersActions from '../../../redux/store/user/user.actions';
 
-const Actuality = ({history, getPublications, publicationsReducer}) => {
+const Actuality = ({getPublications, postPublication, publications, getUsers, users}) => {
 
     const [actuality, setActuality] = useState({
         'description': ''
     });
-    const [add, setAdd] = useState(1);
-    const [actualities, setActualities] = useState([]);
-    const [users, setUsers] = useState([]);
-    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        suggestion();
-        const getActus = async () => getPublications();
+        const getUsers = async () => await getPublications();
+        getUsers()
+    }, []);
+
+    useEffect(() => {
+        const getActus = async () => await getUsers();
         getActus();
         /*const getActus = async () => {
             try {
@@ -33,7 +32,7 @@ const Actuality = ({history, getPublications, publicationsReducer}) => {
             }
         }
         getActus();*/
-    }, [add])
+    }, []);
 
     const handleChange = ({nativeEvent}) => {
         const name = nativeEvent.target.name
@@ -44,18 +43,12 @@ const Actuality = ({history, getPublications, publicationsReducer}) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await postsApi.postPosts(actuality);
-            setAdd(add + 1);
+            await postPublication(actuality);
         } catch ({response}) {
             if (response.data.statusCode === 401) {
                 toast.error('Vous devez être connecté avant de publier quoi que ce soit.');
             }
         }
-    }
-
-    const suggestion = async (e) => {
-        const data = await userApi.getAllUsers();
-        setUsers(data)
     }
 
     return (
@@ -65,14 +58,15 @@ const Actuality = ({history, getPublications, publicationsReducer}) => {
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
                             <label htmlFor="description" className="mt-2 mb-2">Que voulez-vous dire ?</label>
-                            <textarea name="description" id="description" onChange={handleChange} className="form-control"></textarea>
+                            <textarea name="description" id="description" onChange={handleChange}
+                                      className="form-control"></textarea>
                             <br/>
                             <button type="submit" className="btn-custom">Publier !</button>
                         </div>
                     </form>
                 </div>
 
-                {actualities.reverse().map((actuality) =>
+                {publications.reverse().map((actuality) =>
                     <div className="item-flow">
                         <HeaderActuality/>
                         <div className="item-flow-image">
@@ -90,7 +84,7 @@ const Actuality = ({history, getPublications, publicationsReducer}) => {
                         <p className="suggestion-list">
                             <p className="m-0 p-0">
                                 <i className="fas fa-user-circle"></i>
-                                <b className="cursor-pointer website-color"> { user.username }</b>
+                                <b className="cursor-pointer website-color"> {user.username}</b>
                             </p>
                             <a className="m-0 p-0" href="#">S'abonner</a>
                         </p>
@@ -101,12 +95,17 @@ const Actuality = ({history, getPublications, publicationsReducer}) => {
     )
 }
 
-const mapStateToProps = state => ({
-    publicationsReducers: state.publicationsReducers
-})
+const mapStateToProps = (state) => {
+    return {
+        users: state.user.users,
+        publications: state.publication.publications
+    }
+};
 
 const mapDispatchToProps = dispatch => ({
-    getPublications: () => dispatch(publicationsActions.getPublications())
+    getUsers: () => dispatch(usersActions.getUsers()),
+    getPublications: () => dispatch(publicationsActions.getPublications()),
+    postPublication: (publication) => dispatch(publicationsActions.postPublication(publication))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Actuality);

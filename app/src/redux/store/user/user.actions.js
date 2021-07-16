@@ -1,9 +1,4 @@
-
-export const RESET_USER = 'RESET_USER';
-
-export const resetUser = () => ({
-    type: RESET_USER,
-});
+import axios from "axios";
 
 export const userSuccess = users => ({
     type: 'USERS',
@@ -15,21 +10,33 @@ export const usersFailed = error => ({
     payload: 'error'
 })
 
-export const getUsers = () => async dispatch => {
-    try {
-        const response = await fetch('http://localhost:3001/users', {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
+export const userLogged = user => ({
+    type: 'USER_LOGGED',
+    payload: user
+})
+
+export const login = (credentials) => async dispatch => {
+    return axios
+        .post("http://localhost:3001/auth/signin", credentials)
+        .then(({data}) => {
+            data.status !== 422
+                ? dispatch(userLogged(data))
+                : dispatch(usersFailed('Erreur lors de la connexion'));
         })
+        .catch((error) => {
+            dispatch(usersFailed('Erreur lors de la connexion'))
+        })
+}
 
-        const users = await response.json();
-
-        if (response.ok) dispatch(userSuccess(users))
-        else dispatch(usersFailed(users))
-    }catch(e) {
-        dispatch(usersFailed(e))
-    }
+export const getUsers = () => async dispatch => {
+    axios.get('http://localhost:3001/users')
+        .then((response) => {
+            console.log(response);
+            response.status === 200
+                ? dispatch(userSuccess(response.data))
+                : dispatch(usersFailed('Erreur lors du chargement de la liste des users'));
+        })
+        .catch((error) => {
+            dispatch(usersFailed('Erreur lors du chargement de la liste des users'))
+        })
 }
