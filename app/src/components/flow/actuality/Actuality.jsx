@@ -5,8 +5,10 @@ import DescriptionActuality from './description/Description'
 import CommentActuality from './comment/Comment'
 import * as postsApi from "../../../api/posts";
 import {toast} from "react-toastify";
+import {connect} from "react-redux";
+import * as publicationsActions from '../../../redux/store/publication/publication.actions';
 
-const Actuality = ({history}) => {
+const Actuality = ({history, getPublications, publicationsReducer}) => {
 
     const [actuality, setActuality] = useState({
         'description': ''
@@ -16,7 +18,9 @@ const Actuality = ({history}) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const getActus = async () => {
+        const getActus = async () => getPublications();
+        getActus();
+        /*const getActus = async () => {
             try {
                 const data = await postsApi.getPosts();
                 setActualities(data);
@@ -25,7 +29,7 @@ const Actuality = ({history}) => {
                 console.log('Erreur lors de la récupération de la liste des posts');
             }
         }
-        getActus();
+        getActus();*/
     }, [add])
 
     const handleChange = ({nativeEvent}) => {
@@ -75,4 +79,12 @@ const Actuality = ({history}) => {
     )
 }
 
-export default Actuality;
+const mapStateToProps = state => ({
+    publicationsReducers: state.publicationsReducers
+})
+
+const mapDispatchToProps = dispatch => ({
+    getPublications: () => dispatch(publicationsActions.getPublications())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Actuality);
