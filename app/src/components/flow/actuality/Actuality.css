@@ -4,6 +4,16 @@
   height: auto;
 }
 
+.suggestion {
+  margin-top: 100px;
+  position: fixed;
+  z-index: 1;
+  right: 200px;
+  width: 300px;
+  height: 400px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
 .item-flow {
   margin-bottom: 70px;
   width: 100%;
@@ -162,4 +172,25 @@
 .card-custom textarea {
   width: 70%;
   margin: 0 auto;
+}
+
+.suggestion-list {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 15px 0 15px;
+}
+
+.website-color {
+  color: #FC9F5B;
+}
+
+.btn-custom {
+  padding: 10px 15px 10px 15px;
+  background: #FC9F5B;
+  color: black;
+  border: none;
+  border-radius: 7px;
+}
+.btn-custom:hover {
+  filter: grayscale();
 }

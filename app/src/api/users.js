@@ -13,6 +13,18 @@ export const getUsers = async () => {
     return await response.json();
 }
 
+export const getAllUsers = async () => {
+    let response = await fetch('http://localhost:3001/users', {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    })
+
+    return await response.json();
+}
+
 export const postUser = async (user) => {
     let response = await fetch('http://localhost:3001/auth/signup', {
         method: 'POST',

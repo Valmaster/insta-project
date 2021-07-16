@@ -4,6 +4,7 @@ import HeaderActuality from './header/Header'
 import DescriptionActuality from './description/Description'
 import CommentActuality from './comment/Comment'
 import * as postsApi from "../../../api/posts";
+import * as userApi from "../../../api/users";
 import {toast} from "react-toastify";
 import {connect} from "react-redux";
 import * as publicationsActions from '../../../redux/store/publication/publication.actions';
@@ -15,9 +16,11 @@ const Actuality = ({history, getPublications, publicationsReducer}) => {
     });
     const [add, setAdd] = useState(1);
     const [actualities, setActualities] = useState([]);
+    const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        suggestion();
         const getActus = async () => getPublications();
         getActus();
         /*const getActus = async () => {
@@ -50,6 +53,11 @@ const Actuality = ({history, getPublications, publicationsReducer}) => {
         }
     }
 
+    const suggestion = async (e) => {
+        const data = await userApi.getAllUsers();
+        setUsers(data)
+    }
+
     return (
         <>
             <div className="actuality-flow">
@@ -59,7 +67,7 @@ const Actuality = ({history, getPublications, publicationsReducer}) => {
                             <label htmlFor="description" className="mt-2 mb-2">Que voulez-vous dire ?</label>
                             <textarea name="description" id="description" onChange={handleChange} className="form-control"></textarea>
                             <br/>
-                            <button type="submit" className="btn btn-success">Publier !</button>
+                            <button type="submit" className="btn-custom">Publier !</button>
                         </div>
                     </form>
                 </div>
@@ -72,6 +80,20 @@ const Actuality = ({history, getPublications, publicationsReducer}) => {
                         </div>
                         <DescriptionActuality actuality={actuality}/>
                         <CommentActuality/>
+                    </div>
+                )}
+            </div>
+            <div className="suggestion">
+                <br/>
+                {users.reverse().map((user) =>
+                    <div>
+                        <p className="suggestion-list">
+                            <p className="m-0 p-0">
+                                <i className="fas fa-user-circle"></i>
+                                <b className="cursor-pointer website-color"> { user.username }</b>
+                            </p>
+                            <a className="m-0 p-0" href="#">S'abonner</a>
+                        </p>
                     </div>
                 )}
             </div>
