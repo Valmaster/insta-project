@@ -44,19 +44,9 @@ export const logout = () => {
     delete axios.defaults.headers["Authorization"]
 }
 
-/*export const authenticate = async (credentials) => {
-    return axios
-        .post("http://localhost:3001/auth/signin", credentials)
-        .then(({data}) => {
-            window.localStorage.setItem("accessToken", data.accessToken);
-            setAxiosToken(data.accessToken);
-            return false;
-        })
-        .catch(() => true );
-}*/
-
 export const setup = () => {
-    const token = window.localStorage.getItem("accessToken")
+    const store = JSON.parse(window.localStorage.getItem("persist:store"));
+    const token = JSON.parse(store.user).user_logged.accessToken;
 
     if (token) {
         const jwtData = jwtDecode(token)
@@ -72,7 +62,8 @@ export const setup = () => {
 }
 
 export const isAuthenticated = () => {
-    const token = window.localStorage.getItem("accessToken")
+    const store = JSON.parse(window.localStorage.getItem("persist:store"));
+    const token = JSON.parse(store.user).user_logged.accessToken;
 
     if (token) {
         const jwtData = jwtDecode(token)
