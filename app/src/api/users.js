@@ -38,8 +38,9 @@ export const authenticate = async (credentials) => {
         .then(({data}) => {
             window.localStorage.setItem("accessToken", data.accessToken);
             setAxiosToken(data.accessToken);
+            return false;
         })
-        .catch(error => console.error(error));
+        .catch(() => true );
 }
 
 export const setup = () => {

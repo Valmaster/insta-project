@@ -15,8 +15,6 @@ const Actuality = ({history}) => {
     const [actualities, setActualities] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    console.log(actualities)
-
     useEffect(() => {
         const getActus = async () => {
             try {
@@ -62,7 +60,7 @@ const Actuality = ({history}) => {
                     </form>
                 </div>
 
-                {actualities.map((actuality) =>
+                {actualities.reverse().map((actuality) =>
                     <div className="item-flow">
                         <HeaderActuality/>
                         <div className="item-flow-image">

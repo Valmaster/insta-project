@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap');
+
+.website-title {
+    font-family: 'Dela Gothic One', cursive;
+    color: #FC9F5B;
+}
+
+.form-auth {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.form-auth .form {
+    padding-top: 200px;
+    text-align: center;
+}
+
+.separator {
+    height: 1px;
+    width: 100%;
+    background: #FC9F5B;
+}
+
+.btn-custom {
+    padding: 10px 15px 10px 15px;
+    background: #FC9F5B;
+    color: black;
+    border: none;
+    border-radius: 7px;
+}
+.btn-custom:hover {
+    filter: grayscale();
+}

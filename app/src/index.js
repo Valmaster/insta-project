@@ -43,7 +43,7 @@ const Root = () => {
                         </BrowserRouter>
                     </main>
                 </PersistGate>
-                <ToastContainer position={toast.POSITION.TOP_CENTER}/>
+                <ToastContainer position={toast.POSITION.BOTTOM_RIGHT}/>
             </Provider>
         </AuthContext.Provider>
 

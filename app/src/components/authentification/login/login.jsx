@@ -1,6 +1,8 @@
 import React, {useState, useContext} from 'react';
 import * as usersApi from "../../../api/users";
 import AuthContext from "../../../contexts/AuthContext"
+import '../Auth.css';
+import {toast} from "react-toastify";
 
 const Login = ({history}) => {
 
@@ -24,29 +26,49 @@ const Login = ({history}) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await usersApi.authenticate(credentials)
-            setError("")
-            setIsAuthenticated(true)
-            history.replace("/")
+            const error = await usersApi.authenticate(credentials)
+            console.log(error)
+            if (error) {
+                toast.error('Identifiants incorrects')
+            } else {
+                setError("")
+                setIsAuthenticated(true)
+                toast.success('Connexion avec succès !')
+                history.replace("/")
+            }
         } catch (error) {
-            setError("Aucun compte ne possède cet identifiant")
+            toast.error('Identifiants incorrects')
         }
     }
 
     return (
         <>
-            <h1>Connexion à l'application</h1>
+            <div className="form-auth">
+                <div className="form">
+                    <h1 className="website-title">Connexion sur Instatata</h1>
 
-            <form onSubmit={handleSubmit}>
-                <input label="Identifiant" name="username" value={credentials.username} onChange={handleChange}
-                       placeholder="Identifiant" error={error}/>
-                <input label="Mot de passe" name="password" type="password" value={credentials.password} onChange={handleChange}
-                       placeholder="Mot de passe" error={error}/>
+                    <div className="separator"></div>
 
-                <div className="form-group">
-                    <button type="submit" className="btn btn-success">Connexion</button>
+                    <form onSubmit={handleSubmit} className="mt-5">
+                        <div className="row">
+                            <div className="form-group col-sm-6">
+                                <input className="form-control" label="Identifiant" name="username" value={credentials.username} onChange={handleChange}
+                                       placeholder="Identifiant" error={error}/>
+                            </div>
+                            <div className="form-group col-sm-6">
+                                <input className="form-control" label="Mot de passe" name="password" type="password" value={credentials.password} onChange={handleChange}
+                                       placeholder="Mot de passe" error={error}/>
+                            </div>
+                        </div>
+
+                        <br/>
+
+                        <div className="form-group">
+                            <button type="submit" className="btn-custom">Connexion</button>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </>
     )
 }
