@@ -11,6 +11,7 @@ const Actuality = ({history}) => {
     const [actuality, setActuality] = useState({
         'description': ''
     });
+    const [add, setAdd] = useState(1);
     const [actualities, setActualities] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -27,7 +28,7 @@ const Actuality = ({history}) => {
             }
         }
         getActus();
-    }, [])
+    }, [add])
 
     const handleChange = ({nativeEvent}) => {
         const name = nativeEvent.target.name
@@ -39,6 +40,7 @@ const Actuality = ({history}) => {
         e.preventDefault();
         try {
             await postsApi.postPosts(actuality);
+            setAdd(add + 1);
         } catch ({response}) {
             if (response.data.statusCode === 401) {
                 toast.error('Vous devez être connecté avant de publier quoi que ce soit.');
