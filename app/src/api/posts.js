@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const getPosts = async () => {
     let response = await fetch('http://localhost:3001/publications', {
         method: 'GET',
@@ -11,14 +13,5 @@ export const getPosts = async () => {
 }
 
 export const postPosts = async (post) => {
-    let response = await fetch('http://localhost:3001/publications', {
-        method: 'POST',
-        body: JSON.stringify(post),
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        }
-    });
-
-    return await response.json();
+    return axios.post('http://localhost:3001/publications', post);
 }

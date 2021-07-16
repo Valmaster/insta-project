@@ -13,6 +13,9 @@ import Register from "./components/authentification/register/Register";
 import * as usersApi from "./api/users";
 import AuthContext from "./contexts/AuthContext";
 import Login from "./components/authentification/login/login";
+import {ToastContainer} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"
+import {toast} from "react-toastify";
 
 export const history = createBrowserHistory();
 
@@ -40,6 +43,7 @@ const Root = () => {
                         </BrowserRouter>
                     </main>
                 </PersistGate>
+                <ToastContainer position={toast.POSITION.TOP_CENTER}/>
             </Provider>
         </AuthContext.Provider>
 
