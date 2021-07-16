@@ -1,8 +1,7 @@
 .actuality-flow {
   margin-top: 100px;
-  height: 500px;
   width: 600px;
-  height: 10000px;
+  height: auto;
 }
 
 .item-flow {
@@ -150,4 +149,17 @@
   color: #00376b;
   font-weight: bold;
   cursor: pointer;
+}
+
+.card-custom {
+  margin-bottom: 50px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  width: 400px;
+  height: 200px;
+  text-align: center;
+}
+
+.card-custom textarea {
+  width: 70%;
+  margin: 0 auto;
 }

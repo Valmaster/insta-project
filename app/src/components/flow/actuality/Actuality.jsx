@@ -14,6 +14,8 @@ const Actuality = ({history}) => {
     const [actualities, setActualities] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    console.log(actualities)
+
     useEffect(() => {
         const getActus = async () => {
             try {
@@ -28,10 +30,8 @@ const Actuality = ({history}) => {
     }, [])
 
     const handleChange = ({nativeEvent}) => {
-        console.log(actuality);
         const name = nativeEvent.target.name
         const value = nativeEvent.target.value
-        console.log(name, value);
         setActuality({...actuality, [name]: value})
     }
 
@@ -48,11 +48,18 @@ const Actuality = ({history}) => {
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
-                <textarea name="description" onChange={handleChange}></textarea>
-                <button type="submit" className="btn btn-success">Publier</button>
-            </form>
             <div className="actuality-flow">
+                <div className="card-custom">
+                    <form onSubmit={handleSubmit}>
+                        <div className="form-group">
+                            <label htmlFor="description" className="mt-2 mb-2">Que voulez-vous dire ?</label>
+                            <textarea name="description" id="description" onChange={handleChange} className="form-control"></textarea>
+                            <br/>
+                            <button type="submit" className="btn btn-success">Publier !</button>
+                        </div>
+                    </form>
+                </div>
+
                 {actualities.map((actuality) =>
                     <div className="item-flow">
                         <HeaderActuality/>

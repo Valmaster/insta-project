@@ -17,7 +17,7 @@ const DescriptionActuality = ({actuality}) => {
                 <p>{actuality.description}</p>
             </div>
             <div className="item-flow-createdAt">
-                <p>Il y a 19 heures</p>
+                <p>Créé le { actuality.created_at }</p>
             </div>
         </div>
     )
