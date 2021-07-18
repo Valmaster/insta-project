@@ -15,6 +15,11 @@ export const publicationAdded = publication => ({
     payload: publication
 })
 
+export const publicationUpdated = (publication) => ({
+    type: 'UPDATE_PUBLICATION',
+    payload: publication
+})
+
 export const getPublications = () => async dispatch => {
     axios.get('http://localhost:3001/publications')
         .then((response) => {
@@ -39,3 +44,26 @@ export const postPublication = (publication) => async dispatch => {
             dispatch(publicationsFailed('Erreur lors de la création d\'une publication.'))
         })
 }
+
+export const patchPublication = (publication) => async dispatch => {
+    axios.patch('http://localhost:3001/publications/' + publication.id, publication)
+        .then((response) => {
+            response.status === 200
+                ? dispatch(publicationUpdated(response.data))
+                : dispatch(publicationsFailed('Erreur lors de la Mise à jour d\'une publication.'));
+        })
+        .catch((error) => {
+            dispatch(publicationsFailed('Erreur lors de la Mise à jour d\'une publication.'))
+        })
+}
+
+export const deletePublication = (id) => async dispatch => {
+    axios.delete('http://localhost:3001/publications/' + id)
+        .then((response) => {
+            response.status === 200
+                ? dispatch(publicationUpdated(response.data))
+                : dispatch(publicationsFailed('Erreur lors de la suppression d\'une publication.'));
+        })
+        .catch((error) => {
+            dispatch(publicationsFailed('Erreur lors de la suppression d\'une publication.'))
+        })}
