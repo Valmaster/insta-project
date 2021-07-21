@@ -19,3 +19,7 @@ export const postPosts = async (post) => {
 export const patchPosts = async (id, post) => {
     return axios.patch('http://localhost:3001/publications/' + id, post);
 }
+
+export const deletePost = async (id, post) => {
+    return axios.delete('http://localhost:3001/publications/' + id, post);
+}

@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import * as postApi from "../../../../api/posts";
 
-const FormEditActuality = ({actuality}) => {
+const FormEditActuality = ({close, actuality}) => {
 
     const [loading, setLoading] = useState(false);
     const [newActuality, setNewActuality] = useState({
@@ -14,6 +14,7 @@ const FormEditActuality = ({actuality}) => {
         try {
             setLoading(false);
             await postApi.patchPosts(actuality.id, newActuality);
+            close(false);
         } catch (e) {
             console.log(e);
             setLoading(false);

@@ -121,7 +121,7 @@ const Actuality = ({getPublications, postPublication, deletePublication, publica
                     onClose={setShowModal}
                     title="Modifier une actualité"
                 >
-                    <FormEditActuality actuality={theActuality}/>
+                    <FormEditActuality onclose={setShowModal} actuality={theActuality}/>
                 </Modal>
             )
             }
