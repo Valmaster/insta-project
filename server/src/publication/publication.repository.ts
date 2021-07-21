@@ -9,6 +9,7 @@ export class PublicationRepository extends Repository<Publication> {
   async getPublications(): Promise<Publication[]> {
     return await this.createQueryBuilder('publication')
       .leftJoinAndSelect('publication.user', 'user')
+      .orderBy('publication.created_at', 'DESC')
       .getMany();
   }
 
@@ -33,6 +34,7 @@ export class PublicationRepository extends Repository<Publication> {
     const { description } = updatePublicationDto;
 
     publication.description = description;
+    console.log(publication.description);
     await publication.save();
 
     return publication;

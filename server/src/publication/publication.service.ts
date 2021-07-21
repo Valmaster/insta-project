@@ -48,11 +48,8 @@ export class PublicationService {
     );
   }
 
-  async deletePublication(id: number, user: User): Promise<void> {
-    const result = await this.publicationRepository.delete({
-      id,
-      userId: user.id,
-    });
+  async deletePublication(id: number): Promise<void> {
+    const result = await this.publicationRepository.delete(id);
 
     if (result.affected === 0) {
       throw new NotFoundException(`Publication with ${id} not found.`);

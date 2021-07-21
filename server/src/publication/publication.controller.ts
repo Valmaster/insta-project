@@ -60,10 +60,7 @@ export class PublicationController {
 
   @Delete('/:id')
   @UseGuards(AuthGuard())
-  deletePublication(
-    @Param('id', ParseIntPipe) id: number,
-    @GetUser() user: User,
-  ): Promise<void> {
-    return this.publicationService.deletePublication(id, user);
+  deletePublication(@Param('id', ParseIntPipe) id: number): Promise<void> {
+    return this.publicationService.deletePublication(id);
   }
 }

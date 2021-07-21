@@ -15,3 +15,7 @@ export const getPosts = async () => {
 export const postPosts = async (post) => {
     return axios.post('http://localhost:3001/publications', post);
 }
+
+export const patchPosts = async (id, post) => {
+    return axios.patch('http://localhost:3001/publications/' + id, post);
+}
